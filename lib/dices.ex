@@ -3,6 +3,7 @@ defmodule Dices do
     collection
     |> Enum.map(&(Task.async(fn -> func.(&1) end)))
     |> Enum.reduce(0, fn x, acc -> Task.await(x) + acc end)
+    # |> Enum.map(&Task.await/1)
   end
   
   def main(file) do
@@ -12,7 +13,8 @@ defmodule Dices do
   end
 
   def dices([a | [b | []]]) do
-    Enum.reduce(1 .. (String.to_integer(a)), 0, fn(_, acc) -> Enum.random(1..(String.to_integer b)) + acc end)
+    Enum.reduce(1 .. (String.to_integer(a)), 0, fn(_, acc) -> Enum.random(1..(String.to_integer b)) + acc end) 
     # (for i <- 1 .. (String.to_integer(a)), i > 1, do: Enum.random(1..(String.to_integer b))) |> Enum.sum
+    # for i <- 1 .. (String.to_integer(a)), i > 1, do: Enum.random(1..(String.to_integer b))
   end
 end
