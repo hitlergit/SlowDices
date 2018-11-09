@@ -1,17 +1,4 @@
 defmodule Dices do
-  @moduledoc """
-  Documentation for Dices.
-  """
-
-  @doc """
-  Hello world.
-
-  ## Examples
-
-      iex> Dices.hello()
-      :world
-
-  """
   def pmap(collection, func) do
     collection
     |> Enum.map(&(Task.async(fn -> func.(&1) end)))
